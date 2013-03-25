@@ -16,7 +16,7 @@
     DEFINES += NOSVG
 }
 
-wincewm*|symbian|maemo*|simulator {
+wincewm*|symbian|maemo*|simulator|blackberry {
     CONFIG += handheld
 }
 
@@ -71,8 +71,11 @@ CONFIG(release, debug|release) {
 #	CONFIG += console
     D = d
 }
-DESTDIR = bin
-TARGET = tspsg$${D}
+!blackberry {
+    # Putting into bin folder breaks debugging on Blackberry 10
+    DESTDIR = bin
+    TARGET = tspsg$${D}
+}
 
 # Saving all intermediate files to tmp directory.
 MOC_DIR = tmp
